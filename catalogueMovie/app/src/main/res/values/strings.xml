@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Home</string>
+    <string name="movies">Movies</string>
+    <string name="tvshow">Tv Shows</string>
+    <string name="title">Title</string>
+    <string name="release">Release</string>
+    <string name="overview">overview</string>
+    <string name="smallimage">Small Image</string>
+    <string name="imageDetail">Image Detail</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="movieDb">THE MOVIE DB</string>
+    <string name="content">Image Splash Screen</string>
+</resources>
