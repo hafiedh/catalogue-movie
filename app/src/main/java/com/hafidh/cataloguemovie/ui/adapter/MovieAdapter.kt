@@ -1,5 +1,6 @@
 package com.hafidh.cataloguemovie.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun getItemCount(): Int = list.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addList(data: List<MovieEntity>) {
         this.list = data
         notifyDataSetChanged()
