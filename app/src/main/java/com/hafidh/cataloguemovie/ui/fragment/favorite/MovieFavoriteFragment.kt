@@ -40,22 +40,23 @@ class MovieFavoriteFragment : Fragment() {
             adapter = adapterMovie
         }
 
-        viewModel.moviePaged().observe(viewLifecycleOwner,{
-            if(it != null){
-                when(it.status){
-                    Status.LOADING-> binding?.pbMovieFav?.visibility = View.VISIBLE
-                    Status.SUCCESS->{
+        viewModel.moviePaged().observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.LOADING -> binding?.pbMovieFav?.visibility = View.VISIBLE
+                    Status.SUCCESS -> {
                         binding?.pbMovieFav?.visibility = View.GONE
                         adapterMovie.submitList(it.data)
                     }
-                    Status.ERROR-> {
+                    Status.ERROR -> {
                         binding?.pbMovieFav?.visibility = View.GONE
-                        Snackbar.make(requireView(),"Something Wrong", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(requireView(), "Something Wrong", Snackbar.LENGTH_SHORT)
+                            .show()
                     }
                 }
 
             }
-        })
+        }
 
     }
 

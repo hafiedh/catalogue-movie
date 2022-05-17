@@ -44,6 +44,8 @@ object DataHelper {
             )
         }
 
+
+
     fun mappingDetail(input: ItemDatatv) = TvEntity(
         id = input.id,
         poster = input.poster,

@@ -52,19 +52,19 @@ class DetailActivity : AppCompatActivity() {
             ViewModelProvider(this, viewModelFactoryTv)[TvshowViewModel::class.java]
 
         if (movieId != 0) {
-            movieViewModel.getDetail(movieId).observe(this, {
+            movieViewModel.getDetail(movieId).observe(this) {
                 binding.pbDetail.visibility = View.GONE
                 setView(binding)
                 setInitMovie(it, binding)
                 movieViewModel.setId(movieId)
-            })
+            }
         } else {
-            tvViewModel.getDetail(tvId).observe(this, {
+            tvViewModel.getDetail(tvId).observe(this) {
                 binding.pbDetail.visibility = View.GONE
                 setView(binding)
                 setInitTvShow(it, binding)
                 tvViewModel.setId(tvId)
-            })
+            }
         }
     }
     private fun collapseToolbar(bind: ActivityDetailBinding) {
@@ -97,7 +97,7 @@ class DetailActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.favorite, menu)
         this.favoriteMenu = menu
         if (intent.getIntExtra(EXTRA_ID_MOVIE, 0) != 0) {
-            movieViewModel.getMovieSwitch.observe(this, { movie ->
+            movieViewModel.getMovieSwitch.observe(this) { movie ->
                 movie?.let {
                     when (movie.status) {
                         Status.LOADING -> binding.pbDetail.visibility = View.VISIBLE
@@ -118,9 +118,9 @@ class DetailActivity : AppCompatActivity() {
                         }
                     }
                 }
-            })
+            }
         } else {
-            tvViewModel.getTvSwitch.observe(this, { tv ->
+            tvViewModel.getTvSwitch.observe(this) { tv ->
                 tv?.let {
                     when (tv.status) {
                         Status.LOADING -> binding.pbDetail.visibility = View.VISIBLE
@@ -142,7 +142,7 @@ class DetailActivity : AppCompatActivity() {
                     }
                 }
 
-            })
+            }
         }
         return true
     }

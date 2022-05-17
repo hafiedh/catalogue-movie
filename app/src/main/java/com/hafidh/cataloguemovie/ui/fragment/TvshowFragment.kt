@@ -77,7 +77,7 @@ class TvshowFragment : Fragment() {
     }
 
     private fun getTvToDb(data: List<TvEntity>) {
-        viewModel.getTvShows().observe(viewLifecycleOwner, {
+        viewModel.getTvShows().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.pbTvshow.visibility = View.GONE
@@ -88,6 +88,6 @@ class TvshowFragment : Fragment() {
                 Status.LOADING -> {}
                 Status.ERROR -> binding.pbTvshow.visibility = View.GONE
             }
-        })
+        }
     }
 }

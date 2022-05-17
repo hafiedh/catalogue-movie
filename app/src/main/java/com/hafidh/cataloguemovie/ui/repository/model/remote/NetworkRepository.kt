@@ -16,16 +16,6 @@ import retrofit2.Response
 
 class NetworkRepository(private val networkConfig: Config) {
     private val key = BuildConfig.MOVIEDB_KEY
-    companion object{
-        private var INSTANCE: NetworkRepository? = null
-        private val TAG = NetworkRepository::class.java.toString()
-
-        fun getInstance(networkConfig: Config):NetworkRepository{
-            if (INSTANCE == null)
-                INSTANCE = NetworkRepository(networkConfig)
-            return INSTANCE!!
-        }
-    }
 
     interface MovieCallback{
         fun movieResponseCallback(movieResponse: List<MovieEntity>)
@@ -114,5 +104,15 @@ class NetworkRepository(private val networkConfig: Config) {
                 }
 
             })
+    }
+    companion object{
+        private var INSTANCE: NetworkRepository? = null
+        private val TAG = NetworkRepository::class.java.toString()
+
+        fun getInstance(networkConfig: Config):NetworkRepository{
+            if (INSTANCE == null)
+                INSTANCE = NetworkRepository(networkConfig)
+            return INSTANCE!!
+        }
     }
 }

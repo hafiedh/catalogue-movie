@@ -39,22 +39,23 @@ class TvFavoriteFragment : Fragment() {
             adapter = adapterTv
         }
 
-        viewModel.tvPaged().observe(viewLifecycleOwner,{
-            if (it != null){
-                when(it.status){
-                    Status.SUCCESS->{
+        viewModel.tvPaged().observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.status) {
+                    Status.SUCCESS -> {
                         binding?.pbTvFav?.visibility = View.GONE
                         adapterTv?.submitList(it.data)
                         adapterTv?.notifyDataSetChanged()
                     }
-                    Status.LOADING-> binding?.pbTvFav?.visibility = View.VISIBLE
-                    Status.ERROR-> {
+                    Status.LOADING -> binding?.pbTvFav?.visibility = View.VISIBLE
+                    Status.ERROR -> {
                         binding?.pbTvFav?.visibility = View.GONE
-                        Snackbar.make(requireView(),"Something Wrong",Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(requireView(), "Something Wrong", Snackbar.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
-        })
+        }
     }
 
     override fun onDestroy() {

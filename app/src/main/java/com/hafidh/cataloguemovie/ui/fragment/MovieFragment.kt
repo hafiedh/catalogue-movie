@@ -5,25 +5,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hafidh.cataloguemovie.databinding.FragmentMovieBinding
-import com.hafidh.cataloguemovie.ui.repository.model.local.data.MovieEntity
 import com.hafidh.cataloguemovie.ui.activity.DetailActivity
 import com.hafidh.cataloguemovie.ui.activity.MainActivity
 import com.hafidh.cataloguemovie.ui.adapter.MovieAdapter
+import com.hafidh.cataloguemovie.ui.repository.model.local.data.MovieEntity
+import com.hafidh.cataloguemovie.ui.viewmodel.MovieViewModel
+import com.hafidh.cataloguemovie.ui.viewmodel.ViewModelFactory
 import com.hafidh.cataloguemovie.utils.Constans.EXTRA_ID_MOVIE
 import com.hafidh.cataloguemovie.utils.Constans.SPAN_COUNT
 import com.hafidh.cataloguemovie.utils.SetOnClickListener
-import com.hafidh.cataloguemovie.ui.viewmodel.MovieViewModel
-import com.hafidh.cataloguemovie.ui.viewmodel.ViewModelFactory
 import com.hafidh.cataloguemovie.utils.Status
 
 
-class MovieFragment : Fragment() {
+class MovieFragment : androidx.fragment.app.Fragment() {
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var binding: FragmentMovieBinding
     private lateinit var viewModel: MovieViewModel
@@ -47,12 +46,12 @@ class MovieFragment : Fragment() {
         setUpRecyclerView(binding)
         setOnclickListener()
 
-        viewModel.getMovie().observe(viewLifecycleOwner, {
+        viewModel.getMovie().observe(viewLifecycleOwner) {
             binding.pbMovie.visibility = View.GONE
             movieList = it
             movieAdapter.addList(it)
             getMovieToDb()
-        })
+        }
     }
 
     private fun setUpRecyclerView(bind: FragmentMovieBinding) {
@@ -77,7 +76,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun getMovieToDb() {
-        viewModel.getMovies.observe(viewLifecycleOwner, {
+        viewModel.getMovies.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.pbMovie.visibility = View.GONE
@@ -89,6 +88,7 @@ class MovieFragment : Fragment() {
                 }
                 Status.ERROR -> binding.pbMovie.visibility = View.GONE
             }
-        })
+        }
     }
+
 }
